@@ -10,6 +10,5 @@ gpio 7 out
 gpio 11 out
 gpio 12 out
 
-#ENABLE CHANNELS
 
 echo 'Setup Complete'
