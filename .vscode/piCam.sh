@@ -18,3 +18,5 @@ capture(3)
 function capture(cam){
     rapistill -o capture$cam.png
 }
+
+exit
