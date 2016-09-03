@@ -11,7 +11,6 @@ def main():
     print "Cameras"
     cam_path = "/home/pi/Desktop/capture_"
     GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(7, GPIO.OUT)
     GPIO.setup(11, GPIO.OUT)
     GPIO.setup(12, GPIO.OUT)
@@ -35,7 +34,6 @@ def main():
     print cmd1
     os.system(cmd1)
     
-    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(7, GPIO.OUT)
     GPIO.setup(11, GPIO.OUT)
     GPIO.setup(12, GPIO.OUT)
@@ -47,17 +45,17 @@ def main():
     print cmd2
     os.system(cmd2)
     
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(7, GPIO.OUT)
-    GPIO.setup(11, GPIO.OUT)
-    GPIO.setup(12, GPIO.OUT)
-    
-    GPIO.output(7, False)
-    GPIO.output(11, True)
-    GPIO.output(12, False)
-    cmd3 = "raspistill -o " + cam_path + "low.jpg"
-    print cmd3
-    os.system(cmd3)
+##    GPIO.setmode(GPIO.BOARD)
+##    GPIO.setup(7, GPIO.OUT)
+##    GPIO.setup(11, GPIO.OUT)
+##    GPIO.setup(12, GPIO.OUT)
+##    
+##    GPIO.output(7, False)
+##    GPIO.output(11, True)
+##    GPIO.output(12, False)
+##    cmd3 = "raspistill -o " + cam_path + "low.jpg"
+##    print cmd3
+##    os.system(cmd3)
     
     GPIO.cleanup()
     

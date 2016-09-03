@@ -6,10 +6,10 @@ import RPi.GPIO as GPIO
 import cam
 import upc
 
-def main():
+def main(channel):
     upc.main()
     cam.main()
     GPIO.cleanup()
 
 if __name__ == "__main__":
-    main()
+    main(1)
