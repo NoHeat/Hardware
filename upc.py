@@ -16,6 +16,7 @@ import select
 import socket
 import random
 import smtplib
+import d2atest
 
 from semantics3 import Products
 
@@ -78,15 +79,15 @@ def parse_scanner_data(scanner_data):
 def main():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    f = open('/dev/input/event3', 'rb')
+    f = open('/dev/input/event2', 'rb')
 
-    while not GPIO.input(3):
+    while not (d2atest.analog_read() == 0):
         print 'Waiting for scanner data'
         # Wait for binary data from the scanner and then read it
         scan_complete = False
         scanner_data = ''
 
-        while not GPIO.input(3):
+        while not (d2atest.analog_read() == 0):
             rlist, _wlist, _elist = select.select([f], [], [], 0.1)
             if rlist != []:
                 new_data = ''
