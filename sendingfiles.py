@@ -19,7 +19,8 @@ def main (path):
 	s.shutdown(socket.SHUT_WR)
 	print s.recv(1024)
 	s.close()
-	time.sleep(2)
+	time.sleep(1)
+## wait for no fucking reason
 
 if __name__ == "__main__":
     main()

@@ -38,25 +38,6 @@ def createcsv(a, b):
 def clearcsv():
     with open(items_path, 'w'):
         pass
-
-# sends csv file to server
-def sendfile():
-
-    HOST = '192.168.1.26'    # The remote host
-    PORT = 50002             # The same port as used by the server
-
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)     #create new socket using the given address family
-    s.connect((HOST, PORT))   #connect to the remote socket above
-    f = open(items_path, 'rb')  #open the file sent from above, file name can change
-    l = f.read(1024)    #read the file opened
-
-    while (l):
-        s.send(l)   #send recieved flag to server
-        l = f.read(1024)    #read the file opened
-    f.close()
-    s.shutdown(socket.SHUT_WR)
-    print s.recv(1024)
-    s.close()   #close the socket
     
 # calling the api using the UPCCODE which is what our parse scanner returned
 def url_search(UPCCODE):
@@ -93,7 +74,7 @@ def parse_scanner_data(scanner_data):
 #Definition for scanner usage
 
 def main():
-    f = open('/dev/input/event3', 'rb')
+    f = open('/dev/input/event0', 'rb')
 
     while not (sensval.analog_read() == 0):
         print 'Waiting for scanner data'
@@ -118,13 +99,12 @@ def main():
                 print "Scanned barcode '{0}'".format(barcode)
                 itemresult = url_search(barcode)
                 print itemresult
-            # checking for incorrect barcode scan
-            if itemresult == "None":
-                break
-            else:
+            #checking for incorrect barcode scan
+            #if (itemresult == 'None'):
+                #break
+            #else:
                 createcsv(barcode, itemresult)
                 break
-    clearcsv()
 
 
 if __name__ == "__main__":
