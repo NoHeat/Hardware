@@ -26,8 +26,11 @@ sem3 = Products(
     api_secret = "OGQ0YTYwNzdiZDgxMzEwNTVjMTdlMWZlYjY4ZDQ1Y2Y"
     )
 
-upc_path = "/home/pi/Desktop/codes.csv"
-items_path = "/home/pi/Desktop/items.csv"
+# upc_path = "/home/pi/Desktop/codes.csv"
+# items_path = "/home/pi/Desktop/items.csv"
+upc_path = "/root/Desktop/codes.csv"
+items_path = "/root/Desktop/items.csv"
+
 
 # writing to csv file the new items that were scanned to send to the database
 def trackitems(x):

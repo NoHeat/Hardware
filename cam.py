@@ -9,7 +9,8 @@ import sys
 
 def main():
     print "Cameras"
-    cam_path = "/home/pi/Desktop/capture_"
+    # cam_path = "/home/pi/Desktop/capture_"
+    cam_path = "/root/Desktop/capture_"
     GPIO.setwarnings(False)
     GPIO.setup(7, GPIO.OUT)
     GPIO.setup(11, GPIO.OUT)
