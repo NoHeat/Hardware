@@ -1,3 +1,35 @@
+
+Conversation opened. 1 unread message.
+
+Skip to content
+Using Florida International University Mail with screen readers
+Click here to enable desktop notifications for Florida International University Mail.   Learn more  Hide
+ 
+ 
+More 
+1 of 2,701
+ 
+(no subject)
+Inbox
+	x
+Jorge Pena
+	
+Attachments8:25 PM (1 minute ago)
+	
+to me
+Attachments area
+	
+Click here to Reply or Forward
+Using 1.95 GB
+Manage
+Program Policies
+Powered by
+Google
+Last account activity: 0 minutes ago
+Details
+	
+	
+
 #!/usr/bin/env python
 
 #Import for GPIO usage
@@ -26,25 +58,38 @@ sem3 = Products(
     api_secret = "OGQ0YTYwNzdiZDgxMzEwNTVjMTdlMWZlYjY4ZDQ1Y2Y"
     )
 
-# upc_path = "/home/pi/Desktop/codes.csv"
-# items_path = "/home/pi/Desktop/items.csv"
-upc_path = "/root/Desktop/codes.csv"
 items_path = "/root/Desktop/items.csv"
 
-
-# writing to csv file the new items that were scanned to send to the database
-def trackitems(x):
-    with open(items_path, 'w') as itemFile:
-        itemFileWriter = csv.writer(itemFile)
-        y = 1
-        itemFileWriter.writerow([x, y]) 
-
 # append existing barcode scans to document to keep for record
-def trackupc(a, b):
-    with open(upc_path, 'a') as upcFile:
+def createcsv(a, b):
+    with open(items_path, 'a') as upcFile:
         upcFileWriter = csv.writer(upcFile)
         upcFileWriter.writerow([a, b])
+        
+# clear csv file after sent to the server
+def clearcsv():
+    with open(items_path, 'w'):
+        pass
 
+# sends csv file to server
+def sendfile():
+
+    HOST = '192.168.1.26'    # The remote host
+    PORT = 50002             # The same port as used by the server
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)     #create new socket using the given address family
+    s.connect((HOST, PORT))   #connect to the remote socket above
+    f = open(items_path, 'rb')  #open the file sent from above, file name can change
+    l = f.read(1024)    #read the file opened
+
+    while (l):
+        s.send(l)   #send recieved flag to server
+        l = f.read(1024)    #read the file opened
+    f.close()
+    s.shutdown(socket.SHUT_WR)
+    print s.recv(1024)
+    s.close()   #close the socket
+    
 # calling the api using the UPCCODE which is what our parse scanner returned
 def url_search(UPCCODE):
     # Build the request
@@ -105,9 +150,13 @@ def main():
                 print "Scanned barcode '{0}'".format(barcode)
                 itemresult = url_search(barcode)
                 print itemresult
-                trackitems(itemresult)
-                trackupc(barcode, itemresult)
+            # checking for incorrect barcode scan
+            if itemresult == "None":
                 break
+            else:
+                createcsv(barcode, itemresult)
+                break
+    clearcsv()
 
 
 if __name__ == "__main__":

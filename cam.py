@@ -50,13 +50,14 @@ def main():
 ##    GPIO.setup(7, GPIO.OUT)
 ##    GPIO.setup(11, GPIO.OUT)
 ##    GPIO.setup(12, GPIO.OUT)
-##    
+
 ##    GPIO.output(7, False)
 ##    GPIO.output(11, True)
 ##    GPIO.output(12, False)
 ##    cmd3 = "raspistill -o " + cam_path + "low.jpg"
 ##    print cmd3
 ##    os.system(cmd3)
+	
     
     GPIO.cleanup()
     
