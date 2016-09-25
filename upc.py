@@ -1,35 +1,3 @@
-
-Conversation opened. 1 unread message.
-
-Skip to content
-Using Florida International University Mail with screen readers
-Click here to enable desktop notifications for Florida International University Mail.   Learn more  Hide
- 
- 
-More 
-1 of 2,701
- 
-(no subject)
-Inbox
-	x
-Jorge Pena
-	
-Attachments8:25 PM (1 minute ago)
-	
-to me
-Attachments area
-	
-Click here to Reply or Forward
-Using 1.95 GB
-Manage
-Program Policies
-Powered by
-Google
-Last account activity: 0 minutes ago
-Details
-	
-	
-
 #!/usr/bin/env python
 
 #Import for GPIO usage

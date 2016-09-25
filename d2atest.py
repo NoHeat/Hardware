@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # include RPi libraries in to Python code
+
 import RPi.GPIO as GPIO
 import time
 import cam
