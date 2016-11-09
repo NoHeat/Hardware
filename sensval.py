@@ -1,8 +1,9 @@
+#!/usr/bin/env python
 # include RPi libraries in to Python code
 import RPi.GPIO as GPIO
 import time
-import cam
-import upc
+#import cam
+#import upc
 
 # instantiate GPIO as an object
 ##GPIO.setmode(GPIO.BOARD)
@@ -26,13 +27,16 @@ def charge_time():
     count = 0
     GPIO.output(a_pin, True)
     while not GPIO.input(b_pin):
-        count = count +1
+        count = count + 1
     return count
 
 # create analog read function for reading charging and discharging data
 def analog_read():
     discharge()
+#    print charge_time()
     return charge_time()
     
 if __name__ == "__main__":
-    analog_read()
+#add a while loop here to test this alone
+#    while True :
+        analog_read()

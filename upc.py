@@ -26,13 +26,13 @@ sem3 = Products(
     api_secret = "OGQ0YTYwNzdiZDgxMzEwNTVjMTdlMWZlYjY4ZDQ1Y2Y"
     )
 
-items_path = "/root/Desktop/items.csv"
+items_path = "/root/Desktop/GitReps/Hardware/items.csv"
 
 # append existing barcode scans to document to keep for record
 def createcsv(a, b):
     with open(items_path, 'a') as upcFile:
         upcFileWriter = csv.writer(upcFile)
-        upcFileWriter.writerow([a, b])
+        upcFileWriter.writerow([a, b, "Amount", "H", "L", "E"])
         
 # clear csv file after sent to the server
 def clearcsv():
@@ -43,7 +43,7 @@ def clearcsv():
 def url_search(UPCCODE):
     # Build the request
     sem3.products_field("upc", UPCCODE)
-    sem3.products_field("fields", ["name"])
+    sem3.products_field("fields", ["name","category"])
 
     # Run the request
     answer = sem3.get_products()
@@ -53,6 +53,20 @@ def url_search(UPCCODE):
     for item in answer['results']:
 	# print item['name']
         return item['name']
+
+def url_searchcat(UPCCODE):
+    # Build the request
+    sem3.products_field("upc", UPCCODE)
+    sem3.products_field("fields", ["category"])
+
+    # Run the request
+    answer = sem3.get_products()
+    # print answer
+    # View the results of the request
+    # print just the name from the all the info retrieved on that barcode
+    for item in answer['results']:
+	# print item['name']
+        return item['category']
 
 # translating the barcode info retrieved from the event folder into a UPC barcode
 def parse_scanner_data(scanner_data):
@@ -98,14 +112,16 @@ def main():
                 barcode = parse_scanner_data(scanner_data)
                 print "Scanned barcode '{0}'".format(barcode)
                 itemresult = url_search(barcode)
+		catresult = url_searchcat(barcode)
                 print itemresult
+		print catresult
             #checking for incorrect barcode scan
             #if (itemresult == 'None'):
                 #break
             #else:
-                createcsv(barcode, itemresult)
+                createcsv(itemresult, catresult)
                 break
-
+    #clearcsv()    
 
 if __name__ == "__main__":
     main()
