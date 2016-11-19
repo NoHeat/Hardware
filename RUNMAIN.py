@@ -23,10 +23,10 @@ while True:
 	upc.clearcsv()
         print "3"
 	sendingtrigger.main()
-	cam.main()
-	sendingfiles.main("/root/Desktop/capture_top.jpg")
-	sendingfiles.main("/root/Desktop/capture_mid.jpg")
-	sendingfiles.main("/root/Desktop/capture_low.jpg")
+	#cam.main()
+	#sendingfiles.main("/root/Desktop/capture_top.jpg")
+	#sendingfiles.main("/root/Desktop/capture_mid.jpg")
+	#sendingfiles.main("/root/Desktop/capture_low.jpg")
 	print "Files sent!"
         GPIO.cleanup()
     time.sleep(0.05)
