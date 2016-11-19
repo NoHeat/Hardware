@@ -18,7 +18,7 @@ def discharge():
     GPIO.setup(a_pin, GPIO.IN)
     GPIO.setup(b_pin, GPIO.OUT)
     GPIO.output(b_pin, False)
-    time.sleep(0.005)
+    time.sleep(0.001)
 
 # create time function for capturing analog count value
 def charge_time():

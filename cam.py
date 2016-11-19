@@ -34,42 +34,41 @@ def main():
     GPIO.output(7, False)
     GPIO.output(11, False)
     GPIO.output(12, True)
-#    cmd1 = "raspistill -o " + cam_path + "top.jpg"
-#    print cmd1
-#    os.system(cmd1)
+    cmd1 = "raspistill -o " + cam_path + "top.jpg"
+    print cmd1
+    os.system(cmd1)
 
     GPIO.output(29, False)
-#    GPIO.setup(29, GPIO.OUT)
-#    GPIO.setup(7, GPIO.OUT)
-#    GPIO.setup(11, GPIO.OUT)
-#    GPIO.setup(12, GPIO.OUT)
+    GPIO.setup(29, GPIO.OUT)
+    GPIO.setup(7, GPIO.OUT)
+    GPIO.setup(11, GPIO.OUT)
+    GPIO.setup(12, GPIO.OUT)
 
     
 
-#    GPIO.output(31, True)
-#    GPIO.output(7, True)
-#    GPIO.output(11, False)
-#    GPIO.output(12, True)
-#    cmd2 = "raspistill -o " + cam_path + "mid.jpg"
-#    print cmd2
-#    os.system(cmd2)
+    GPIO.output(31, True)
+    GPIO.output(7, True)
+    GPIO.output(11, False)
+    GPIO.output(12, True)
+    cmd2 = "raspistill -o " + cam_path + "mid.jpg"
+    print cmd2
+    os.system(cmd2)
 
-#    GPIO.output(31, False)
-#    GPIO.setup(31, GPIO.OUT)
-#    GPIO.setup(7, GPIO.OUT)
-#    GPIO.setup(11, GPIO.OUT)
-#    GPIO.setup(12, GPIO.OUT)
+    GPIO.output(31, False)
+    GPIO.setup(31, GPIO.OUT)
+    GPIO.setup(7, GPIO.OUT)
+    GPIO.setup(11, GPIO.OUT)
+    GPIO.setup(12, GPIO.OUT)
 
+    GPIO.output(33, True)
+    GPIO.output(7, False)
+    GPIO.output(11, True)
+    GPIO.output(12, False)
+    cmd3 = "raspistill -o " + cam_path + "low.jpg"
+    print cmd3
+    os.system(cmd3)
 
-#    GPIO.output(33, True)
-#    GPIO.output(7, False)
-#    GPIO.output(11, True)
-#    GPIO.output(12, False)
-#    cmd3 = "raspistill -o " + cam_path + "low.jpg"
-#    print cmd3
-#    os.system(cmd3)
-
-#    GPIO.output(33, False)
+    GPIO.output(33, False)
 	
     
     GPIO.cleanup()
