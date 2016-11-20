@@ -1,0 +1,8 @@
+#!/bin/bash
+
+lxterminal cd /root/Desktop/GitReps/Hardware
+echo "STARTING RUNMAIN"
+sleep 60
+python RUNMAIN.py
+echo "DONE"
+exit 0

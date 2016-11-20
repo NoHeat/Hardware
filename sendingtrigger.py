@@ -4,7 +4,7 @@ import socket
 import sys
 import time
 
-HOST = '192.168.1.225'    # The remote host
+HOST = '172.20.10.10'    # The remote host
 PORT = 1234              # The same port as used by the server
 def main ():
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)     #create new socket using the given address family

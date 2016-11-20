@@ -22,22 +22,41 @@ from semantics3 import Products
 
 # Set up a client to talk to the Semantics3 API using your Semantics3 API Credentials
 sem3 = Products(
-    api_key = "SEM310553EF475655749A2C9447BFDAFD50A",
-    api_secret = "OGQ0YTYwNzdiZDgxMzEwNTVjMTdlMWZlYjY4ZDQ1Y2Y"
+    api_key = "SEM375B44F931EF6AD7FF77E14B063C46283",
+    api_secret = "ZmQxZTkzMWUzOTIxOGFkMGEyNDljMjE2MTM4NGQwOTg"
     )
 
-items_path = "/root/Desktop/GitReps/Hardware/items.csv"
+items_path = "/root/Desktop/items.csv"
 
 # append existing barcode scans to document to keep for record
 def createcsv(a, b):
     with open(items_path, 'a') as upcFile:
         upcFileWriter = csv.writer(upcFile)
-        upcFileWriter.writerow([a, b, "Amount", "H", "L", "E"])
+        upcFileWriter.writerow([a, b, "High", "H", "L", "E"])
         
 # clear csv file after sent to the server
 def clearcsv():
     with open(items_path, 'w'):
         pass
+
+# sends csv file to server
+def sendfile():
+
+    HOST = '192.168.1.26'    # The remote host
+    PORT = 50002             # The same port as used by the server
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)     #create new socket using the given address family
+    s.connect((HOST, PORT))   #connect to the remote socket above
+    f = open(items_path, 'rb')  #open the file sent from above, file name can change
+    l = f.read(1024)    #read the file opened
+
+    while (l):
+        s.send(l)   #send recieved flag to server
+        l = f.read(1024)    #read the file opened
+    f.close()
+    s.shutdown(socket.SHUT_WR)
+    print s.recv(1024)
+    s.close()   #close the socket
     
 # calling the api using the UPCCODE which is what our parse scanner returned
 def url_search(UPCCODE):
@@ -53,7 +72,6 @@ def url_search(UPCCODE):
     for item in answer['results']:
 	# print item['name']
         return item['name']
-
 def url_searchcat(UPCCODE):
     # Build the request
     sem3.products_field("upc", UPCCODE)
@@ -67,7 +85,6 @@ def url_searchcat(UPCCODE):
     for item in answer['results']:
 	# print item['name']
         return item['category']
-
 # translating the barcode info retrieved from the event folder into a UPC barcode
 def parse_scanner_data(scanner_data):
     upc_chars = []
@@ -112,16 +129,17 @@ def main():
                 barcode = parse_scanner_data(scanner_data)
                 print "Scanned barcode '{0}'".format(barcode)
                 itemresult = url_search(barcode)
-		catresult = url_searchcat(barcode)
+                catresult = url_searchcat(barcode)
                 print itemresult
-		print catresult
-            #checking for incorrect barcode scan
-            #if (itemresult == 'None'):
+                print catresult
+            # checking for incorrect barcode scan
+            #if itemresult == "None":
                 #break
             #else:
                 createcsv(itemresult, catresult)
                 break
-    #clearcsv()    
+    #clearcsv()
+
 
 if __name__ == "__main__":
     main()

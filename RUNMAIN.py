@@ -17,17 +17,16 @@ while True:
         upc.main()
 	print "1"
 	os.system('python pycsv_withindexer.py dbitems.db /root/Desktop/GitReps/Hardware')
-	print "1.5"
 	sendingfiles1.main("/root/Desktop/GitReps/Hardware/dbitems.db")
 	print "2"
 	upc.clearcsv()
         print "3"
 	sendingtrigger.main()
-	#cam.main()
-	#sendingfiles.main("/root/Desktop/capture_top.jpg")
-	#sendingfiles.main("/root/Desktop/capture_mid.jpg")
-	#sendingfiles.main("/root/Desktop/capture_low.jpg")
+	cam.main()
+	sendingfiles.main("/root/Desktop/capture_top.jpg")
+	sendingfiles.main("/root/Desktop/capture_mid.jpg")
+	sendingfiles.main("/root/Desktop/capture_low.jpg")
 	print "Files sent!"
         GPIO.cleanup()
-    time.sleep(0.05)
+    time.sleep(0.1)
     
